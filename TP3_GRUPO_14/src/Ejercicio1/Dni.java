@@ -10,7 +10,20 @@ public class Dni {
 		boolean auxLetra = false;
 	
 	//Falta desarrollo
+	for(int i=0; i <Dni.length(); i++)
+	{
+		if(Character.isDigit(Dni.charAt(i)))
+			
+		auxLetra=false;
+		
+	}
 	
+	if(auxLetra == true)
+	{
  throw new DniInvalido();
+	}
+	return false;
+	
+ 
 	}
 }
