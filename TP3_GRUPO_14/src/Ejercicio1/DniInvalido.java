@@ -1,6 +1,6 @@
 package Ejercicio1;
 
-public class DniInvalido extends Exception {
+public class DniInvalido extends RuntimeException{
 
 	public DniInvalido() {
 		

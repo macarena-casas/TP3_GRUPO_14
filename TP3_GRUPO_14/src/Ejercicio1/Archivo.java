@@ -4,8 +4,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.TreeSet;
 
-public class Archivo {
+public class Archivo extends Persona {
 	
 	private String ruta;
 	
@@ -32,6 +33,7 @@ public class Archivo {
 	
 	
 	public void leer() {
+		 TreeSet<Persona> listaPersonas =new TreeSet<Persona>();
 		FileReader entrada;
 		try {
 			entrada = new FileReader(ruta);
@@ -39,9 +41,21 @@ public class Archivo {
 			String linea = "";
 			while(linea != null) {
 				System.out.println(linea);
-				linea = miBuffer.readLine();
-				
+		
+		     //  revisar
+				  String[] datos = linea.split("-");
+				  if(datos.length==3) {
+				  String nombre = datos[0];		
+				  String apellido = datos[1];
+				  String dni = datos[2];				  				
+				  Persona persona=new Persona(nombre,apellido,dni);
+				 
+				  listaPersonas.add(persona);
+				  }
+			//  
+				  linea = miBuffer.readLine();
 			}
+			System.out.println(listaPersonas);	
 			miBuffer.close();
 			entrada.close();
 		} catch (IOException e) {

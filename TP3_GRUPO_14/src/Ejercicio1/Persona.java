@@ -1,21 +1,29 @@
 package Ejercicio1;
 
-public class Persona implements Comparable<Persona>{
+public class Persona extends Dni implements Comparable <Persona> {
 	
 	private String nombre;
 	private String apellido;
-	private int dni;
+	private String dni;
 	
 	public Persona() {
 		nombre = "Sin Nombre";
 		apellido= "Sin Apellido";
-		dni=11111111; 
+		dni="Sin Dni"; 
 	}
 	
-	public Persona(String nombre, String apellido, int dni) {
+	public Persona(String nombre, String apellido, String dni) {
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.dni = dni;
+		try {
+			if (verificarDniInvalido(dni)==false) {
+				this.dni = dni;
+			}
+		} 
+		catch (DniInvalido e) {
+			System.out.println("El dni de: "+ nombre + ", "+apellido+ " es invalido.");	
+			this.dni = " ";
+		}
 	}
 
 	public String getNombre() {
@@ -34,13 +42,15 @@ public class Persona implements Comparable<Persona>{
 		this.apellido = apellido;
 	}
 
-	public int getDni() {
+	public String getDni() {
 		return dni;
 	}
 
-	public void setDni(int dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
+	
+	
 	
 
 	@Override
