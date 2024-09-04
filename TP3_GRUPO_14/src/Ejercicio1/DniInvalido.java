@@ -1,6 +1,8 @@
 package Ejercicio1;
 
-public class DniInvalido extends RuntimeException{
+import java.io.IOException;
+
+public class DniInvalido extends IOException{
 
 	public DniInvalido() {
 		

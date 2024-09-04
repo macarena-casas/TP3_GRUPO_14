@@ -1,9 +1,12 @@
 package Ejercicio1;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 public class Archivo extends Persona {
@@ -32,35 +35,58 @@ public class Archivo extends Persona {
 	}
 	
 	
-	public void leer() {
-		 TreeSet<Persona> listaPersonas =new TreeSet<Persona>();
+	public TreeSet<Persona> cargarPersonas() {
+		TreeSet<Persona> listaPersonas =new TreeSet<Persona>();
 		FileReader entrada;
 		try {
 			entrada = new FileReader(ruta);
 			BufferedReader miBuffer = new BufferedReader(entrada);
-			String linea = "";
+			String linea = miBuffer.readLine();
 			while(linea != null) {
-				System.out.println(linea);
-		
-		     //  revisar
-				  String[] datos = linea.split("-");
-				  if(datos.length==3) {
-				  String nombre = datos[0];		
-				  String apellido = datos[1];
-				  String dni = datos[2];				  				
-				  Persona persona=new Persona(nombre,apellido,dni);
-				 
-				  listaPersonas.add(persona);
-				  }
-			//  
-				  linea = miBuffer.readLine();
+				String[] datos  = linea.split("-") ;
+				try 
+				{
+					if(datos.length == 3) {
+						Persona persona = new Persona(datos[0], datos[1], datos[2]);
+						Persona.verificarDniInvalido(persona.getDni());
+						System.out.println(persona.toString());
+						listaPersonas.add(persona);
+					}
+					
+				}
+				catch (DniInvalido e) 
+				{
+					System.out.println(e.getMessage());
+				}
+				linea = miBuffer.readLine();
 			}
-			System.out.println(listaPersonas);	
+			
 			miBuffer.close();
 			entrada.close();
 		} catch (IOException e) {
 			System.out.println("No se encontro el archivo");
 		}
+		return listaPersonas;
+	}
+	
+	public void guardarArchivo(TreeSet<Persona> personas, File archivo) {
+		
+		FileWriter salidas = null;
+		BufferedWriter bSalidas = null;
+		
+		try {
+			salidas = new FileWriter(archivo,true);
+			bSalidas = new BufferedWriter(salidas);
+	            for (Persona persona : personas) {
+	                String textoPersona = persona.getNombre() + "-" + persona.getApellido() + "-" + persona.getDni() + "\n";
+	                bSalidas.write(textoPersona);
+	            }
+	            System.out.println("Archivo creado con éxito");
+	            bSalidas.close();
+	            salidas.close();
+	        } catch (IOException e) {
+	        	System.out.println("Error al crear el archivo: " + e.getMessage());
+	        }
 	}
 	
 

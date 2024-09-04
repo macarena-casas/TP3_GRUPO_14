@@ -1,6 +1,6 @@
 package Ejercicio1;
 
-public class Persona extends Dni implements Comparable <Persona> {
+public class Persona implements Comparable <Persona> {
 	
 	private String nombre;
 	private String apellido;
@@ -15,15 +15,7 @@ public class Persona extends Dni implements Comparable <Persona> {
 	public Persona(String nombre, String apellido, String dni) {
 		this.nombre = nombre;
 		this.apellido = apellido;
-		try {
-			if (verificarDniInvalido(dni)==false) {
-				this.dni = dni;
-			}
-		} 
-		catch (DniInvalido e) {
-			System.out.println("El dni de: "+ nombre + ", "+apellido+ " es invalido.");	
-			this.dni = " ";
-		}
+		this.dni = dni;
 	}
 
 	public String getNombre() {
@@ -68,6 +60,13 @@ public class Persona extends Dni implements Comparable <Persona> {
 			return -1;
 		}
 		return 1;
+	}
+	
+	public static void verificarDniInvalido(String dni) throws DniInvalido{
+		if(!dni.matches("[0-9]+"))
+		{
+			throw new DniInvalido();
+		}
 	}
 
 }

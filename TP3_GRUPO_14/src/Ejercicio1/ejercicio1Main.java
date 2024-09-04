@@ -1,13 +1,14 @@
 package Ejercicio1;
 
-
+import java.io.File;
+import java.util.TreeSet;
 
 public class ejercicio1Main {
 
 	public static void main(String[] args) {
 
 		 
-		
+		TreeSet<Persona> personas = new TreeSet<Persona>();
 		Archivo archivo = new Archivo();
 		archivo.setRuta("Personas.txt");
 		
@@ -19,9 +20,9 @@ public class ejercicio1Main {
 			System.out.println("No le hay archivo :(");
 		}
 		
-		archivo.leer();
-
+		personas = archivo.cargarPersonas();
 		
+		archivo.guardarArchivo(personas, new File("Resultado.txt"));	
 			
 		
 	}
