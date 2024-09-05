@@ -9,6 +9,7 @@ public class ejercicio1Main {
 
 		 
 		TreeSet<Persona> personas = new TreeSet<Persona>();
+	
 		Archivo archivo = new Archivo();
 		archivo.setRuta("Personas.txt");
 		

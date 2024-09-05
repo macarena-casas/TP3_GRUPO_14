@@ -6,11 +6,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Iterator;
+import java.util.Comparator;
 import java.util.TreeSet;
 
 public class Archivo extends Persona {
 	
+	private static final String Comparator = null;
 	private String ruta;
 	
 	public boolean existe() {
@@ -36,7 +37,16 @@ public class Archivo extends Persona {
 	
 	
 	public TreeSet<Persona> cargarPersonas() {
-		TreeSet<Persona> listaPersonas =new TreeSet<Persona>();
+		
+		Comparator<Persona> comparadorPorApellido = new Comparator<Persona>() {
+			@Override
+			public int compare(Persona p1, Persona p2) {
+				return p1.getApellido().compareTo(p2.getApellido());
+			}
+		};
+		
+		TreeSet<Persona> listaPersonas = new TreeSet<Persona>();
+		
 		FileReader entrada;
 		try {
 			entrada = new FileReader(ruta);
@@ -48,6 +58,7 @@ public class Archivo extends Persona {
 				{
 					if(datos.length == 3) {
 						Persona persona = new Persona(datos[0], datos[1], datos[2]);
+						
 						Persona.verificarDniInvalido(persona.getDni());
 						System.out.println(persona.toString());
 						listaPersonas.add(persona);
