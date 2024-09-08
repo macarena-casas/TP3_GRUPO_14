@@ -38,12 +38,6 @@ public class Archivo extends Persona {
 	
 	public TreeSet<Persona> cargarPersonas() {
 		
-		Comparator<Persona> comparadorPorApellido = new Comparator<Persona>() {
-			@Override
-			public int compare(Persona p1, Persona p2) {
-				return p1.getApellido().compareTo(p2.getApellido());
-			}
-		};
 		
 		TreeSet<Persona> listaPersonas = new TreeSet<Persona>();
 		

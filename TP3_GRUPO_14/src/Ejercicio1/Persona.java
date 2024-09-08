@@ -52,14 +52,14 @@ public class Persona implements Comparable <Persona> {
 
 	@Override
 	public int compareTo(Persona o) {
-		int s=o.nombre.compareTo(this.nombre);
+		int s=o.apellido.compareTo(this.apellido);
 		if(s == 0)
 		return 0;
 		
 		if(s < 0) {
-			return -1;
+			return 1;
 		}
-		return 1;
+		return -1;
 	}
 	
 	public static void verificarDniInvalido(String dni) throws DniInvalido{
