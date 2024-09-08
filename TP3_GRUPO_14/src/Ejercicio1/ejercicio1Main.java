@@ -21,7 +21,7 @@ public class ejercicio1Main {
 			System.out.println("No le hay archivo :(");
 		}
 		
-		personas = archivo.cargarPersonas();
+		personas = archivo.leerPersonas();
 		
 		archivo.guardarArchivo(personas, new File("Resultado.txt"));	
 			

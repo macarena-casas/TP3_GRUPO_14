@@ -36,7 +36,7 @@ public class Archivo extends Persona {
 	}
 	
 	
-	public TreeSet<Persona> cargarPersonas() {
+	public TreeSet<Persona> leerPersonas() {
 		
 		
 		TreeSet<Persona> listaPersonas = new TreeSet<Persona>();
@@ -75,24 +75,36 @@ public class Archivo extends Persona {
 	}
 	
 	public void guardarArchivo(TreeSet<Persona> personas, File archivo) {
-		
-		FileWriter salidas = null;
-		BufferedWriter bSalidas = null;
-		
-		try {
-			salidas = new FileWriter(archivo,true);
-			bSalidas = new BufferedWriter(salidas);
-	            for (Persona persona : personas) {
-	                String textoPersona = persona.getNombre() + "-" + persona.getApellido() + "-" + persona.getDni() + "\n";
-	                bSalidas.write(textoPersona);
-	            }
-	            System.out.println("Archivo creado con éxito");
-	            bSalidas.close();
-	            salidas.close();
-	        } catch (IOException e) {
-	        	System.out.println("Error al crear el archivo: " + e.getMessage());
+	    FileWriter salidas = null;
+	    BufferedWriter bSalidas = null;
+
+	    try {
+	       
+	        salidas = new FileWriter(archivo, false);
+	        bSalidas = new BufferedWriter(salidas);
+	        
+	        for (Persona persona : personas) {
+	            String textoPersona = persona.getNombre() + "-" + persona.getApellido() + "-" + persona.getDni() + "\n";
+	            bSalidas.write(textoPersona);
 	        }
+
+	        System.out.println("Archivo creado con éxito");
+	    } catch (IOException e) {
+	        System.out.println("Error al crear el archivo: " + e.getMessage());
+	    } finally {
+	        try {
+	            if (bSalidas != null) {
+	                bSalidas.close();
+	            }
+	            if (salidas != null) {
+	                salidas.close();
+	            }
+	        } catch (IOException e) {
+	            System.out.println("Error al cerrar el archivo: " + e.getMessage());
+	        }
+	    }
 	}
+
 	
 
 }
